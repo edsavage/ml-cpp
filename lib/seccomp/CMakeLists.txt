@@ -9,7 +9,22 @@
 # limitation.
 #
 
-project("ML Seccomp")
+project("ML Seccomp" LANGUAGES CXX)
+
+if(${BUILD_MODULES})
+  message(STATUS "Using C++20 Modules")
+  if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.28)
+      cmake_policy(SET CMP0155 NEW)
+  endif()
+
+  # Tell CMake that we explicitly want `import std`. This will initialize the
+  # property on all targets declared after this to 1
+  set (CMAKE_CXX_MODULE_STD 1)
+
+  set (CMAKE_CXX_STANDARD 23)
+  set (CMAKE_CXX_STANDARD_REQUIRED ON)
+  set (CMAKE_CXX_EXTENSIONS ON)
+endif()
 
 set(SRCS
   CSystemCallFilter.cc

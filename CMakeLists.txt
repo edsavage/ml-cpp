@@ -10,7 +10,15 @@
 #
 
 # CMake 3.19.2 is the minimum version required to support Apple Silicon
-cmake_minimum_required(VERSION 3.19.2)
+cmake_minimum_required(VERSION 3.30)
+
+# Set experimental flag to enable `import std` support from CMake.
+# This must be enabled before C++ language support.
+set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD
+        # This specific value changes as experimental support evolves. See
+        # `Help/dev/experimental.rst` in the CMake source corresponding to
+        # your CMake build for the exact value to use.
+        "0e5b6991-d74f-4b3d-a41c-cf096e0b2508")
 
 set (CMAKE_BASE_ROOT_DIR ${CMAKE_SOURCE_DIR})
 list (FIND CMAKE_MODULE_PATH "${CMAKE_BASE_ROOT_DIR}/cmake" _index)
@@ -51,7 +59,7 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
       string(REPLACE arm aarch HOST_SYSTEM_PROCESSOR ${HOST_SYSTEM_PROCESSOR})
     endif()
     message(STATUS "HOST_SYSTEM_PROCESSOR=${HOST_SYSTEM_PROCESSOR}")
-    set(CMAKE_TOOLCHAIN_FILE "cmake/${HOST_SYSTEM_NAME}-${HOST_SYSTEM_PROCESSOR}.cmake")
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_MODULE_PATH}/${HOST_SYSTEM_NAME}-${HOST_SYSTEM_PROCESSOR}.cmake")
   endif()
 endif()
 

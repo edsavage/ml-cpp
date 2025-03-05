@@ -187,6 +187,14 @@ function(ml_add_library _target _type)
   endif()
 
   add_library(${_target} ${_type} ${PLATFORM_SRCS})
+  if (${BUILD_MODULES} AND _target STREQUAL "MlSeccomp")
+    include_directories(${CMAKE_SOURCE_DIR})
+    target_sources(${_target}
+      PUBLIC
+        FILE_SET CXX_MODULES FILES
+          "${_target}.cppm"
+    )
+  endif()
 
   set_property(TARGET ${_target} PROPERTY POSITION_INDEPENDENT_CODE TRUE)
 

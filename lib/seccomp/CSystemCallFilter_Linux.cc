@@ -8,20 +8,25 @@
  * compliance with the Elastic License 2.0 and the foregoing additional
  * limitation.
  */
+// WARNING: Detected unhandled non interesting includes.
+// It is not suggested mix includes and imports from the compiler's
+// perspective. Since it may introduce redeclarations within different
+// translation units and the compiler is not able to handle such patterns
+// efficiently.
+//
+// See https://clang.llvm.org/docs/StandardCPlusPlusModules.html#performance-tips
 #include <seccomp/CSystemCallFilter.h>
-
 #include <core/CLogger.h>
-
-#include <cerrno>
-#include <cstdint>
-#include <cstring>
-
 #include <linux/audit.h>
 #include <linux/filter.h>
 #include <linux/seccomp.h>
 #include <sys/prctl.h>
 #include <sys/syscall.h>
-
+// There unhandled macro uses found in the body:
+//	'EACCES' defined in /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h:101:9
+//	'errno' defined in /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h:81:9
+//	'EFAULT' defined in /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h:102:9
+import std;
 namespace ml {
 namespace seccomp {
 

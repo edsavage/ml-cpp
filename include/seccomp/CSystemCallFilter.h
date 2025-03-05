@@ -11,7 +11,10 @@
 #ifndef INCLUDED_ml_seccomp_CSystemCallFilter_h
 #define INCLUDED_ml_seccomp_CSystemCallFilter_h
 
+#ifndef LIB_SECCOMP_USE_MODULES
 #include <core/CNonInstantiatable.h>
+
+#endif // LIB_SECCOMP_USE_MODULES
 
 namespace ml {
 namespace seccomp {

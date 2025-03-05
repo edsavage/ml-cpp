@@ -1,0 +1,10 @@
+modules:
+  - name: seccomp
+    path: lib/seccomp/MlSeccomp.cppm
+    headers: include/seccomp/*.h
+mode: header-wrapper
+controlling_macro: LIB_SECCOMP_USE_MODULES
+is_std_module_available: true
+srcs_to_rewrite: lib/seccomp/*.cc
+compilation_database: cmake-build-relwithdebinfo/compile_commands.json
+#std_module_path: async_simple/std.cppm

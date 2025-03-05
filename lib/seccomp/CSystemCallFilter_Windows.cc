@@ -8,12 +8,17 @@
  * compliance with the Elastic License 2.0 and the foregoing additional
  * limitation.
  */
+// WARNING: Detected unhandled non interesting includes.
+// It is not suggested mix includes and imports from the compiler's
+// perspective. Since it may introduce redeclarations within different
+// translation units and the compiler is not able to handle such patterns
+// efficiently.
+//
+// See https://clang.llvm.org/docs/StandardCPlusPlusModules.html#performance-tips
 #include <seccomp/CSystemCallFilter.h>
-
 #include <core/CLogger.h>
 #include <core/CWindowsError.h>
 #include <core/WindowsSafe.h>
-
 namespace ml {
 namespace seccomp {
 

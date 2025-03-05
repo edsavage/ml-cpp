@@ -8,17 +8,24 @@
  * compliance with the Elastic License 2.0 and the foregoing additional
  * limitation.
  */
+// WARNING: Detected unhandled non interesting includes.
+// It is not suggested mix includes and imports from the compiler's
+// perspective. Since it may introduce redeclarations within different
+// translation units and the compiler is not able to handle such patterns
+// efficiently.
+//
+// See https://clang.llvm.org/docs/StandardCPlusPlusModules.html#performance-tips
 #include <seccomp/CSystemCallFilter.h>
-
 #include <core/CLogger.h>
-
 #include <paths.h>
 #include <sandbox.h>
 #include <unistd.h>
 
 #include <cerrno>
 #include <cstring>
-
+// There unhandled macro uses found in the body:
+//	'errno' defined in /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h:81:9
+//import std;
 namespace ml {
 namespace seccomp {
 
