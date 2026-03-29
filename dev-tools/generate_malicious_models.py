@@ -48,7 +48,7 @@ class MixedFileReaderModel(torch.nn.Module):
 
 
 class HiddenInSubmodule(torch.nn.Module):
-    """Hides aten::sin (unrecognised) three levels deep in submodules."""
+    """Hides aten::logit (unrecognised) three levels deep in submodules."""
     def __init__(self):
         super().__init__()
         self.inner = _Inner()
@@ -69,14 +69,14 @@ class _Inner(torch.nn.Module):
 
 class _Leaf(torch.nn.Module):
     def forward(self, x: Tensor) -> Tensor:
-        return torch.sin(x)
+        return torch.logit(x)
 
 
 class ConditionalMalicious(torch.nn.Module):
-    """Hides an unrecognised op (aten::sin) inside one branch of a conditional."""
+    """Hides an unrecognised op (aten::logit) inside one branch of a conditional."""
     def forward(self, x: Tensor) -> Tensor:
         if x.sum() > 0:
-            return torch.sin(x)
+            return torch.logit(x)
         else:
             return x + x
 
@@ -84,8 +84,8 @@ class ConditionalMalicious(torch.nn.Module):
 class ManyUnrecognisedOps(torch.nn.Module):
     """Uses several different unrecognised ops to simulate an unexpected arch."""
     def forward(self, x: Tensor) -> Tensor:
-        a = torch.sin(x)
-        b = torch.cos(x)
+        a = torch.logit(x)
+        b = torch.erfc(x)
         c = torch.tan(x)
         d = torch.exp(x)
         return a + b + c + d
