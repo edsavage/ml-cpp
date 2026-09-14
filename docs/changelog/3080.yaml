@@ -1,5 +1,5 @@
 area: Machine Learning
 issues: []
 pr: 3080
-summary: Fixed a gap in the ML seccomp filter that allowed i386 system calls to bypass the x86_64 allowlist on Linux.
+summary: Reject non-native ABIs in ML seccomp filter (socketcall/getuid collision)
 type: bug
